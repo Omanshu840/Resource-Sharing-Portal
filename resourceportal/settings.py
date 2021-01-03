@@ -33,14 +33,15 @@ EMAIL_PORT = EMAIL_PORT
 SECRET_KEY = '#tbbhm5^t8qc+p*=5w%yymdyozc=mkft2b$&(ym_&0jzmey$w_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['resource-sharing-platform.herokuapp.com' , '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    
     'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -53,16 +54,19 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'storages',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'resourceportal.urls'
@@ -145,14 +149,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_HOST = 'https://d10gxcejxssdth.cloudfront.net' if not DEBUG else ''
 
-STATICFILES_DIRS = (
+
+
+AWS_ACCESS_KEY_ID = 'AKIAXAJSYVY7L5C7U6WW'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'resource-sharing-platform'
+AWS_S3_CUSTOM_DOMAIN = 'resource-sharing-platform.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-)
+]
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'resourceportal.storage_backends.MediaStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
