@@ -87,7 +87,7 @@
     <div class="col-12 col-md-6">
       <a href="Dept/{{ department.DName }}">
         <div class="card-section1" id="card-section1">
-          <img src="{% static %}{{ department.ImgLink }}" />
+          <img src="{{ department.ImgLink.url }}" />
           <h4 class="mt-3">{{ department.Ddes }}</h4>
         </div>
       </a>
@@ -167,33 +167,31 @@
 </div>
 <div>
   <div style="background-color: #E9ECEF; padding-top: 30px; padding-bottom: 100px;">
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <div class="card-section1" id="card-section1">
-          <div class="card-header bg-dark text-white">
-            <h3 class="mt-3">Most recently added</h3>
-          </div>
-          <br>
-            {% for resource in resources %}
-                {{ resource.RName }} ( {{ resource.RDes }} )
-              <br>
-              <br>
-            {% endfor %}
-        </div>
-      </div>
-      <div class="col-12 col-md-6">
-        <div class="card-section1" id="card-section1">
-          <div class="card-header bg-dark text-white">
-            <h3 class="mt-3">Most Popular Resources</h3>
-          </div>
-          <br>
-          {% for popular_resource in popular_resources %}
-            {{ popular_resource.RName }} ( {{ popular_resource.RDes }} )
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="card-section1" id="card-section1">
+            <div class="card-header bg-dark text-white">
+              <h3 class="mt-3">Most recently added</h3>
+            </div>
             <br>
-            <br>
-          {% endfor %} 
+              {% for resource in resources %}
+                <a href="{{ resource.filepath.url }}" target="_blank"><p>{{ resource.RName }} {{resource.RDes}}</p></a>
+              {% endfor %}
+          </div>
         </div>
+        <div class="col-12 col-md-6">
+          <div class="card-section1" id="card-section1">
+            <div class="card-header bg-dark text-white">
+              <h3 class="mt-3">Most Popular Resources</h3>
+            </div>
+            <br>
+            {% for popular_resource in popular_resources %}
+              <a href="{{ resource.filepath.url }}" target="_blank"><p>{{ popular_resource.RName }} {{ popular_resource.RDes }}</p></a>
+            {% endfor %} 
+          </div>
 
+        </div>
       </div>
     </div>
 </div>
