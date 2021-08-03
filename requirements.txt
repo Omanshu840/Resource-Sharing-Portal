@@ -18,6 +18,7 @@ django-allauth==0.44.0
 django-queryset-csv==1.1.0
 django-storages==1.11.1
 django-storages-azure==1.6.8
+django-utils-six==2.0
 google-api-core==1.23.0
 google-api-python-client==1.12.8
 google-auth==1.23.0
