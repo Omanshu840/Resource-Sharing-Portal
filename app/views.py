@@ -99,7 +99,7 @@ def signup(request):
                 send_mail(subject, message, from_email,
                           to_list, fail_silently=True)
 
-                django_login(request, user)
+                django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
                 messages.success(
                     request, "Successfully Logged In as "+user.username+"")
@@ -130,7 +130,7 @@ def login(request):
         user = authenticate(username=username, password=password)
 
         if user:
-            django_login(request, user)
+            django_login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(
                 request, "Successfully Logged In as "+user.username+"")
         else:
