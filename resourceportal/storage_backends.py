@@ -1,5 +1,5 @@
 from django.conf import settings
-from resourceportal.azure_storage import AzureStorage
+from resourceportal.storages.azure_storage import AzureStorage
 
 
 class AzureMediaStorage(AzureStorage):

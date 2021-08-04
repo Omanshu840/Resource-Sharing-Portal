@@ -11,8 +11,8 @@ from django.utils import timezone
 from django.utils.deconstruct import deconstructible
 from django.utils.encoding import filepath_to_uri, force_bytes
 
-from storages.base import BaseStorage
-from storages.utils import (
+from resourceportal.storages.base import BaseStorage
+from resourceportal.storages.utils import (
     clean_name, get_available_overwrite_name, safe_join, setting,
 )
 
