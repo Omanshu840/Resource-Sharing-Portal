@@ -1,5 +1,17 @@
-from storages.backends.s3boto3 import S3Boto3Storage
+from django.conf import settings
+from resourceportal.azure_storage import AzureStorage
 
-class MediaStorage(S3Boto3Storage):
-    location = 'media'
-    file_overwrite = False
+
+class AzureMediaStorage(AzureStorage):
+    account_name = settings.AZURE_ACCOUNT_NAME
+    account_key = settings.AZURE_STORAGE_KEY
+    azure_container = settings.AZURE_MEDIA_CONTAINER
+    expiration_secs = None
+    overwrite_files = True
+
+
+class AzureStaticStorage(AzureStorage):
+    account_name = settings.AZURE_ACCOUNT_NAME
+    account_key = settings.AZURE_STORAGE_KEY
+    azure_container = settings.AZURE_STATIC_CONTAINER
+    expiration_secs = None

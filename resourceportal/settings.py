@@ -156,24 +156,23 @@ USE_TZ = True
 
 # STATIC_HOST = 'https://d10gxcejxssdth.cloudfront.net' if not DEBUG else ''
 
+DEFAULT_FILE_STORAGE = 'resourceportal.storage_backends.AzureMediaStorage'
+STATICFILES_STORAGE  = 'resourceportal.storage_backends.AzureStaticStorage'
+
+AZURE_STORAGE_KEY = config('AZURE_STORAGE_KEY')
+AZURE_ACCOUNT_NAME = config('AZURE_ACCOUNT_NAME')  # your account name
+AZURE_MEDIA_CONTAINER = 'media'
+AZURE_STATIC_CONTAINER = 'static'
+
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.azureedge.net'  # CDN URL
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'  # Files URL
+
+STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_STATIC_CONTAINER}/'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_MEDIA_CONTAINER}/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-
-# STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-AWS_QUERYSTRING_AUTH = False
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
