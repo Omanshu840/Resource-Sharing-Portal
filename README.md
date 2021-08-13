@@ -2,7 +2,7 @@
 A Web App for students to upload and download Resources.
 
 ### Website
-[https://resource-sharing-platform.herokuapp.com/](https://resource-sharing-platform.herokuapp.com/)
+[https://resource-sharing-portal.live](https://resource-sharing-portal.live)
 
 
 ## Technology Stack
@@ -11,7 +11,7 @@ A Web App for students to upload and download Resources.
  - HTML
  - CSS
  - BootStrap
- - SQLite (Database)
+ - PostgreSQL (Database)
 
 ## Features 
 
